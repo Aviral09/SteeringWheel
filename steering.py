@@ -19,7 +19,7 @@ while True:
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     value = (11, 11)
     blurred = cv2.GaussianBlur(hsv, value,0)
-    colourLower = np.array([53, 100, 0])
+    colourLower = np.array([53, 55, 209])
     colourUpper = np.array([180,255,255])
 
     height = img.shape[0]
@@ -45,11 +45,11 @@ while True:
         M = cv2.moments(c)
         cX = int(M["m10"]/(M["m00"]+0.000001))
 
-        if cX < (width//2 - 20):
+        if cX < (width//2 - 40):
             PressKey(A)
             key = True
             currentKey.append(A)
-        elif cX > (width//2 + 20):
+        elif cX > (width//2 + 40):
             PressKey(D)
             key = True
             currentKey.append(D)
@@ -60,21 +60,21 @@ while True:
         key = True
         currentKey.append(Space)
     
-    img = cv2.rectangle(img,(0,0),(width//2- 20,height//2 ),(0,255,0),1)
-    cv2.putText(img,'LEFT',(110,30),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0))
+    img = cv2.rectangle(img,(0,0),(width//2- 40,height//2 ),(0,255,0),1)
+    cv2.putText(img,'LEFT',(110,30),cv2.FONT_HERSHEY_DUPLEX,1,(139,0,0))
 
-    img = cv2.rectangle(img,(width//2 + 20,0),(width-2,height//2 ),(0,255,0),1)
-    cv2.putText(img,'RIGHT',(440,30),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0))
+    img = cv2.rectangle(img,(width//2 + 40,0),(width-2,height//2 ),(0,255,0),1)
+    cv2.putText(img,'RIGHT',(440,30),cv2.FONT_HERSHEY_DUPLEX,1,(139,0,0))
 
     img = cv2.rectangle(img,(2*(width//5),3*(height//4)),(3*width//5,height),(0,255,0),1)
-    cv2.putText(img,'NITRO',(2*(width//5) + 20,height-10),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0))
+    cv2.putText(img,'NITRO',(2*(width//5) + 20,height-10),cv2.FONT_HERSHEY_DUPLEX,1,(139,0,0))
 
 
     cv2.imshow("Steering", img)
 
     if not key and len(currentKey) != 0:
         for current in currentKey:
-            ReleaseKey(key)
+            ReleaseKey(current)
         currentKey = list()
 
     key = cv2.waitKey(1) & 0xFF

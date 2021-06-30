@@ -18,7 +18,7 @@ while True:
 
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     value = (11, 11)
-    blurred = cv2.GaussianBlur(img, value,0)
+    blurred = cv2.GaussianBlur(hsv, value,0)
     colourLower = np.array([53, 55, 209])
     colourUpper = np.array([180,255,255])
 
@@ -81,5 +81,4 @@ while True:
     if key == ord("q"):
         break
  
-video.stop()
 cv2.destroyAllWindows()
